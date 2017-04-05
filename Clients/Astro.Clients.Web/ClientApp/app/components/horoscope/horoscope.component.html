@@ -1,0 +1,19 @@
+﻿<h1>Horoscopes</h1>
+<p *ngIf="!horoscopes"><em>Loading...</em></p>
+
+<div class="row">
+    <div class="col-md-4" *ngFor="let horoscope of horoscopes">
+        <div class="panel panel-default" style="margin:10px">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ horoscope.sign.name }}</h3>
+            </div>
+            <div class="panel-body">
+                {{ horoscope.globalText }}
+                <ul>
+                    <li *ngFor="let topic of horoscope.topics">{{ topic.title }}:<span  *ngFor="let currentStar of iterate(topic.totalStars)" class='glyphicon ' [class.glyphicon-star]="currentStar <= topic.stars"  [class.glyphicon-star-empty]="currentStar > topic.stars" ></span> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
