@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Astro.Common.Common;
@@ -18,15 +19,22 @@ namespace Astro.Clients.DummyConsoleExtractor
 		{
 			Init();
 			ILoggerFactory loggerFactory = InstanceContext.Instance.Kernel.Get<ILoggerFactory>();
-			ILogger currentClassLogger = loggerFactory.GetCurrentClassLogger();
+			ILogger logger = loggerFactory.GetCurrentClassLogger();
 
+			try
+			{
 
-			currentClassLogger.Info("Getting retriever");
+				logger.Info("Getting retriever");
 
-			IRetriever retriever = InstanceContext.Instance.Kernel.Get<IRetriever>();
-			currentClassLogger.Info("Getting results");
-			HoroscopeSet retrieveHoroscope = retriever.RetrieveHoroscope(DateTime.Today).Result;
-			currentClassLogger.Info(retrieveHoroscope.ToString());
+				IRetriever retriever = InstanceContext.Instance.Kernel.Get<IRetriever>();
+				logger.Info("Getting results");
+				HoroscopeSet retrieveHoroscope = retriever.RetrieveHoroscope(DateTime.Today).Result;
+				logger.Info(retrieveHoroscope.ToString());
+			}
+			catch (Exception ex)
+			{
+				logger.Fatal(ex,"Got an uncaught exception");
+			}
 			Console.ReadLine();
 		}
 

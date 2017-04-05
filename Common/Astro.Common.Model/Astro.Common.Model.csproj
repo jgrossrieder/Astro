@@ -45,13 +45,12 @@
     <Compile Include="Horoscope.cs" />
     <Compile Include="HoroscopeSet.cs" />
     <Compile Include="HoroscopeTopic.cs" />
-    <Compile Include="Names\Signs.Designer.cs" />
-    <Compile Include="Names\Signs.fr1.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Names\Signs.fr.resx" />
-    <EmbeddedResource Include="Names\Signs.resx" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\aquarius.png" />
@@ -66,6 +65,12 @@
     <Content Include="Resources\scorpio.png" />
     <Content Include="Resources\taurus.png" />
     <Content Include="Resources\virgo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
