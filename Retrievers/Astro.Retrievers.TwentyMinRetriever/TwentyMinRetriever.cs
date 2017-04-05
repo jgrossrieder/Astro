@@ -4,30 +4,27 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Astro.Common.Model;
 using Astro.Retrievers.Common;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using Microsoft.Extensions.Logging;
 
 namespace Astro.Retrievers.TwentyMinRetriever
 {
 	public class TwentyMinRetriever:IRetriever
 	{
+		private ILogger<TwentyMinRetriever> _logger;
 		private const string URL_FORMAT = "http://www.20min.ch/printpdf/VD_{0:yyyyMMdd}.pdf";
 		private const string LOCAL_FILE_FORMAT = "VD_{0:yyyyMMdd}.pdf";
 		private const string PAGE_WITH_HOROSCOPE_MARKER = "Les astres et vous";
 
 		private const string HOROSCOPE_PATTERN =@"\s__SIGN__([\S\s]*?)AMOUR\s*([★✩]{1,4})\sJOB\s*([★✩]{1,4})\sVITALITÉ\s*([★✩]{1,4})";
 
-
-		private ILogger _logger;
-
-		public TwentyMinRetriever(ILoggerFactory factory)
+		public TwentyMinRetriever(ILoggerFactory loggerFactory)
 		{
-			_logger = factory.CreateLogger<TwentyMinRetriever>();
+			_logger = loggerFactory.CreateLogger<TwentyMinRetriever>();
 		}
 
 		public async Task<HoroscopeSet> RetrieveHoroscope(DateTime date)
@@ -114,10 +111,18 @@ namespace Astro.Retrievers.TwentyMinRetriever
 			}
 			else
 			{
-				using (WebClient wc = new WebClient())
+				using (HttpClient httpClient = new HttpClient())
 				{
-				_logger.LogInformation($"Downloading {url} to {targetFilePath}");
-				 await wc.DownloadFileTaskAsync(url, targetFilePath);
+					_logger.LogInformation($"Downloading {url} to {targetFilePath}");
+					using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url))
+					{
+						using (
+							Stream contentStream = await (await httpClient.SendAsync(request)).Content.ReadAsStreamAsync(),
+								stream = new FileStream(targetFilePath, FileMode.Create, FileAccess.Write, FileShare.None, 16000, true))
+						{
+							await contentStream.CopyToAsync(stream);
+						}
+					}
 				}
 			}
 		}
