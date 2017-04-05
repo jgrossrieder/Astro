@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Retrievers", "Retrievers", "{CFECB52B-D10F-4DE2-8F84-8735EFA34EAD}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astro.Retrievers.TwentyMinRetriever", "Retrievers\Astro.Retrievers.20MinRetriever\Astro.Retrievers.TwentyMinRetriever.csproj", "{8D7AE54A-11C7-41E5-B354-C03EAA01F170}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astro.Common.Repository", "Common\Astro.Common.Repository\Astro.Common.Repository.csproj", "{2F3C0F42-85C6-4E61-91E9-413AA6CF36AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Astro.Clients.Web", "Clients\Astro.Clients.Web\Astro.Clients.Web.csproj", "{3ED62A9A-C003-400D-80A2-32013E1B749A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2F3C0F42-85C6-4E61-91E9-413AA6CF36AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F3C0F42-85C6-4E61-91E9-413AA6CF36AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F3C0F42-85C6-4E61-91E9-413AA6CF36AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED62A9A-C003-400D-80A2-32013E1B749A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED62A9A-C003-400D-80A2-32013E1B749A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED62A9A-C003-400D-80A2-32013E1B749A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED62A9A-C003-400D-80A2-32013E1B749A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +68,6 @@ Global
 		{EF03A8AA-130C-4A72-A798-547DBE6531C9} = {FB188B41-F666-46D8-B1FB-1BD068C08CEB}
 		{8D7AE54A-11C7-41E5-B354-C03EAA01F170} = {CFECB52B-D10F-4DE2-8F84-8735EFA34EAD}
 		{2F3C0F42-85C6-4E61-91E9-413AA6CF36AC} = {FB188B41-F666-46D8-B1FB-1BD068C08CEB}
+		{3ED62A9A-C003-400D-80A2-32013E1B749A} = {2E142E56-A242-408F-ADA3-7CF8CB2F6EF6}
 	EndGlobalSection
 EndGlobal
