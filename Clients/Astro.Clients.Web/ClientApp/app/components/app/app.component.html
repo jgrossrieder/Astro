@@ -1,4 +1,4 @@
-<div class='container-fluid'>
+<!--<div class='container-fluid'>
     <div class='row'>
         <div class='col-sm-3'>
             <nav-menu></nav-menu>
@@ -7,4 +7,55 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+</div>-->
+
+<header id="navbar">
+    <div id="navbar-container" class="boxed">
+
+        <!--Brand logo & name-->
+        <!--================================-->
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+                <img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">
+                <div class="brand-title">
+                    <span class="brand-text">Nifty</span>
+                </div>
+            </a>
+        </div>
+        <!--================================-->
+        <!--End brand logo & name-->
+        <!--Navbar Dropdown-->
+        <!--================================-->
+        <div class="navbar-content clearfix">
+            <ul class="nav navbar-top-links pull-left">
+
+                <!--Navigation toogle button TAKE THIS -->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li class="tgl-menu-btn">
+                    <a class="mainnav-toggle" href="#">
+                        <i class="pli-view-list icon-lg"></i>
+                    </a>
+                </li>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End Navigation toogle button-->
+
+            </ul>
+            <ul class="nav navbar-top-links pull-right">
+                <!--Note could put some links here-->
+            </ul>
+        </div>
+        <!--================================-->
+        <!--End Navbar Dropdown-->
+
+    </div>
+</header>
+
+<div class="boxed">
+    <div id="content-container">
+
+        <div id="page-content">
+            <router-outlet></router-outlet>
+            </div>
+        </div>
 </div>
+<nav-menu></nav-menu>

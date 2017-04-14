@@ -28,6 +28,12 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\nifty\css\nifty.min.css" />
+    <Content Include="libs\nifty\js\nifty.min.js" />
+    <Content Include="libs\nifty\img\theme-ocean.min.css" />
+    <Content Include="libs\nifty\nifty.min.css" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\Astro.Common.Repository\Astro.Common.Repository.csproj" />
     <ProjectReference Include="..\..\Retrievers\Astro.Retrievers.20MinRetriever\Astro.Retrievers.TwentyMinRetriever.csproj" />
     <ProjectReference Include="..\..\Retrievers\Astro.Retrievers.Common\Astro.Retrievers.Common.csproj" />

@@ -8,7 +8,10 @@ module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     const sharedConfig = {
         stats: { modules: false },
-        resolve: { extensions: [ '.js' ] },
+        resolve: {
+            extensions: [ '.js' ],
+            modules: [path.resolve(__dirname, "libs"), "node_modules"]
+        },
         module: {
             rules: [
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
@@ -33,6 +36,11 @@ module.exports = (env) => {
                 'event-source-polyfill',
                 'jquery',
                 'zone.js',
+                'nifty/js/nifty.min.js',
+                'nifty/css/nifty.min.css',
+                'nifty/css/theme-ocean.min.css',
+                'icon-sets/icons/line-icons/premium-line-icons.min.css', 
+                //'icon-sets/icons/solid-icons/premium-solid-icons.min.css',
             ]
         },
         output: {
