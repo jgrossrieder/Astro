@@ -4,6 +4,8 @@ import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
 import 'bootstrap';
 const rootElemTagName = 'app'; // Update this if you change your root component selector
+import * as $ from 'jquery';
+
 
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {
@@ -21,7 +23,10 @@ if (module['hot']) {
 
 // Boot the application, either now or when the DOM content is loaded
 const platform = platformUniversalDynamic();
-const bootApplication = () => { platform.bootstrapModule(AppModule); };
+const bootApplication = () => {
+    platform.bootstrapModule(AppModule);
+    $(document).trigger('nifty.ready');
+};
 if (document.readyState === 'complete') {
     bootApplication();
 } else {

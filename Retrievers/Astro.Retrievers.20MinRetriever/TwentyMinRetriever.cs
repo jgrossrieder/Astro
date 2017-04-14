@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Astro.Common.Model;
 using Astro.Retrievers.Common;
+using iTextSharp.text.exceptions;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using Microsoft.Extensions.Logging;
@@ -42,14 +43,21 @@ namespace Astro.Retrievers.TwentyMinRetriever
 
 		private HoroscopeSet ExtractHoroscope(DateTime date, string localPath)
 		{
-			PdfReader pdfReader = new PdfReader(localPath);
-			_logger.LogInformation($"Extracting horoscope from {localPath}");
-			String pageAsText = FindPageWithHoroscope(pdfReader);
-			List<Horoscope> horoscopes = ParseHoroscope(pageAsText);
+		    try
+		    {
+		        PdfReader pdfReader = new PdfReader(localPath);
+		        _logger.LogInformation($"Extracting horoscope from {localPath}");
+		        String pageAsText = FindPageWithHoroscope(pdfReader);
+		        List<Horoscope> horoscopes = ParseHoroscope(pageAsText);
 
-			pdfReader.Close();
+		        pdfReader.Close();
 
-			return new HoroscopeSet() { Time = date , Horoscopes = new ObservableCollection<Horoscope>(horoscopes) };
+		        return new HoroscopeSet {Time = date, Horoscopes = new ObservableCollection<Horoscope>(horoscopes)};
+		    }
+		    catch (InvalidPdfException)
+		    {
+		        return new HoroscopeSet { Time = date };
+		    }
 		}
 
 		private List<Horoscope> ParseHoroscope(string pageAsText)
@@ -64,10 +72,10 @@ namespace Astro.Retrievers.TwentyMinRetriever
 					_logger.LogError($"Unable to find the sign {sign.Name}");
 					continue;
 				}
-				Horoscope horoscope = new Horoscope() {Sign = sign, GlobalText = FormatText(match.Groups[1].Value)};
-				horoscope.Topics.Add(new HoroscopeTopic(){Title = "Amour", TotalStars = 4, Stars = match.Groups[2].Value.Count(c=>c== '★') });
-				horoscope.Topics.Add(new HoroscopeTopic(){Title = "Job", TotalStars = 4, Stars = match.Groups[3].Value.Count(c=>c== '★') });
-				horoscope.Topics.Add(new HoroscopeTopic(){Title = "Vitalité", TotalStars = 4, Stars = match.Groups[4].Value.Count(c=>c== '★') });
+				Horoscope horoscope = new Horoscope {Sign = sign, GlobalText = FormatText(match.Groups[1].Value)};
+				horoscope.Topics.Add(new HoroscopeTopic {Title = "Amour", TotalStars = 4, Stars = match.Groups[2].Value.Count(c=>c== '★') });
+				horoscope.Topics.Add(new HoroscopeTopic {Title = "Job", TotalStars = 4, Stars = match.Groups[3].Value.Count(c=>c== '★') });
+				horoscope.Topics.Add(new HoroscopeTopic {Title = "Vitalité", TotalStars = 4, Stars = match.Groups[4].Value.Count(c=>c== '★') });
 				horoscopes.Add(horoscope);
 			}
 			return horoscopes;
